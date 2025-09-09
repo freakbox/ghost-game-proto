@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://de41xky6tln6"]
+
+[ext_resource type="Script" uid="uid://ckt76od2y0pnr" path="res://scenes/sword/sword.gd" id="1_foc86"]
+[ext_resource type="Texture2D" uid="uid://q4v0j57rov40" path="res://assets/images/sword.png" id="1_v80dd"]
+[ext_resource type="Script" uid="uid://bd7gi4c126h10" path="res://scripts/collision/hitbox_component.gd" id="3_u815k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ps2e"]
+size = Vector2(2, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u815k"]
+size = Vector2(4, 24)
+
+[node name="Sword" type="Node2D"]
+script = ExtResource("1_foc86")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_v80dd")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_u815k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_2ps2e")
+
+[node name="ReflectHitboxComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("3_u815k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReflectHitboxComponent"]
+shape = SubResource("RectangleShape2D_u815k")

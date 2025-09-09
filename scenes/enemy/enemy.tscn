@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvo66ap8lkl"]
+
+[ext_resource type="Texture2D" uid="uid://d1rgy14nhs8nd" path="res://assets/images/enemy.png" id="1_4a83h"]
+[ext_resource type="Script" uid="uid://dfavcxm0nvoh7" path="res://scenes/enemy/enemy.gd" id="1_a3pup"]
+[ext_resource type="Script" uid="uid://dmijgrsf05r1g" path="res://scripts/spawn/spawner_component.gd" id="3_tjssy"]
+[ext_resource type="PackedScene" uid="uid://de41xky6tln6" path="res://scenes/sword/sword.tscn" id="4_gl05p"]
+[ext_resource type="Script" uid="uid://bd7gi4c126h10" path="res://scripts/collision/hitbox_component.gd" id="5_gl05p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4a83h"]
+size = Vector2(28, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cwlon"]
+size = Vector2(26, 24)
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_a3pup")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4a83h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4a83h")
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-18, 0)
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+target_position = Vector2(18, 0)
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("3_tjssy")
+scene = ExtResource("4_gl05p")
+
+[node name="ShotTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("5_gl05p")
+metadata/_custom_type_script = "uid://bd7gi4c126h10"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_cwlon")
