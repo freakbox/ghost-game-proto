@@ -4,13 +4,13 @@
 [ext_resource type="Script" uid="uid://dfavcxm0nvoh7" path="res://scenes/enemy/enemy.gd" id="1_a3pup"]
 [ext_resource type="Script" uid="uid://dmijgrsf05r1g" path="res://scripts/spawn/spawner_component.gd" id="3_tjssy"]
 [ext_resource type="PackedScene" uid="uid://de41xky6tln6" path="res://scenes/sword/sword.tscn" id="4_gl05p"]
-[ext_resource type="Script" uid="uid://bd7gi4c126h10" path="res://scripts/collision/hitbox_component.gd" id="5_gl05p"]
+[ext_resource type="Script" uid="uid://bcmxsh7st8nja" path="res://scripts/collision/hurtbox_component.gd" id="5_gl05p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4a83h"]
 size = Vector2(28, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cwlon"]
-size = Vector2(26, 24)
+size = Vector2(24, 24)
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_a3pup")
@@ -33,13 +33,14 @@ scene = ExtResource("4_gl05p")
 
 [node name="ShotTimer" type="Timer" parent="."]
 wait_time = 5.0
+one_shot = true
 autostart = true
 
-[node name="HitboxComponent" type="Area2D" parent="."]
+[node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("5_gl05p")
-metadata/_custom_type_script = "uid://bd7gi4c126h10"
+metadata/_custom_type_script = "uid://bcmxsh7st8nja"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("RectangleShape2D_cwlon")

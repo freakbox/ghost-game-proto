@@ -6,6 +6,11 @@ extends CharacterBody2D
 @onready var ray_cast_left: RayCast2D = $RayCastLeft
 @onready var ray_cast_right: RayCast2D = $RayCastRight
 
+@onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
+
+var shot_times := [5.0, 1.0, 5.0, 1.0, 4.0, 1.0, 3.0, 0.5, 2.0, 0.5]
+var current_time_index: int = 0
+
 var speed: float = 80
 var walking_state: int = 0
 var current_state_time: float = 0.2
@@ -16,7 +21,15 @@ func _ready() -> void:
 	velocity.x = speed
 	shot_timer.timeout.connect(func() -> void:
 		spawner_component.spawn(global_position)
+		current_time_index = (current_time_index + 1) % shot_times.size()
+		shot_timer.wait_time = shot_times[current_time_index]
+		shot_timer.start()
 		)
+	hurtbox_component.hurt.connect(get_damage)
+
+
+func get_damage(hitbox: HitboxComponent) -> void:
+	queue_free()
 
 
 func _physics_process(delta: float) -> void:

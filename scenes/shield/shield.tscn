@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d06u1petenewx"]
+[gd_scene load_steps=9 format=3 uid="uid://d06u1petenewx"]
 
 [ext_resource type="Script" uid="uid://khoaktnqqleb" path="res://scenes/shield/shield.gd" id="1_vqfoy"]
 [ext_resource type="Texture2D" uid="uid://cm2nfohyktkep" path="res://assets/images/shield.png" id="2_esdu0"]
@@ -11,6 +11,9 @@ size = Vector2(32, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kbfv6"]
 size = Vector2(32, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lcb3g"]
+size = Vector2(8, 7)
 
 [node name="Shield" type="CharacterBody2D"]
 script = ExtResource("1_vqfoy")
@@ -33,3 +36,13 @@ shape = SubResource("RectangleShape2D_kbfv6")
 script = ExtResource("4_kbfv6")
 scene = ExtResource("5_lcb3g")
 metadata/_custom_type_script = "uid://dmijgrsf05r1g"
+
+[node name="CenterHurtboxComponent" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("3_oyk5a")
+metadata/_custom_type_script = "uid://bcmxsh7st8nja"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CenterHurtboxComponent"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_lcb3g")

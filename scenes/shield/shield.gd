@@ -3,11 +3,13 @@ extends CharacterBody2D
 
 const SPEED: float = 100
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
+@onready var center_hurtbox_component: HurtboxComponent = $CenterHurtboxComponent
+
 signal magic_hit
 @onready var spawner_component: SpawnerComponent = $SpawnerComponent
 
 func _ready() -> void:
-	hurtbox_component.hurt.connect(handle_hurtbox_hit)
+	center_hurtbox_component.hurt.connect(handle_hurtbox_hit)
 
 
 func handle_hurtbox_hit(hitbox: HitboxComponent) -> void:
