@@ -22,10 +22,10 @@ shape = SubResource("RectangleShape2D_4a83h")
 texture = ExtResource("1_4a83h")
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
-target_position = Vector2(-18, 0)
+target_position = Vector2(-22, 0)
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
-target_position = Vector2(18, 0)
+target_position = Vector2(22, 0)
 
 [node name="SpawnerComponent" type="Node2D" parent="."]
 script = ExtResource("3_tjssy")

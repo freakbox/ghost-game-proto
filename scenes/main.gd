@@ -1,26 +1,11 @@
 extends Node2D
 
-@onready var shield: Shield = $Shield
-@onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
-@onready var magic_progress_bar: ProgressBar = $MagicProgressBar
+const BATTLE = preload("res://scenes/battle/battle.tscn")
 
-func _ready() -> void:
-	hurtbox_component.hurt.connect(shake_camera)
-	shield.magic_hit.connect(fill_magic_bar)
+func _on_button_pressed() -> void:
+	get_tree().change_scene_to_packed(BATTLE)
 
 
-func fill_magic_bar() -> void:
-	if magic_progress_bar.value < magic_progress_bar.max_value:
-		magic_progress_bar.value += 1
-
-
-func shake_camera(hitbox: HitboxComponent) -> void:
-	print('shake')
-
-
-func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("attack"):
-		if magic_progress_bar.value == magic_progress_bar.max_value:
-			magic_progress_bar.value = 0
-			shield.cast_magic()
-			
+func _on_button_2_pressed() -> void:
+	BattleLoader.enemy_speed_relative = 1.6
+	get_tree().change_scene_to_packed(BATTLE)

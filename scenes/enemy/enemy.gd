@@ -1,3 +1,4 @@
+class_name Enemy
 extends CharacterBody2D
 
 @onready var shot_timer: Timer = $ShotTimer
@@ -11,10 +12,12 @@ extends CharacterBody2D
 var shot_times := [5.0, 1.0, 5.0, 1.0, 4.0, 1.0, 3.0, 0.5, 2.0, 0.5]
 var current_time_index: int = 0
 
-var speed: float = 80
+var speed: float = 80 * BattleLoader.enemy_speed_relative
 var walking_state: int = 0
 var current_state_time: float = 0.2
 var walking_direction: int = 1
+
+signal enemy_defeated
 
 
 func _ready() -> void:
@@ -29,6 +32,7 @@ func _ready() -> void:
 
 
 func get_damage(hitbox: HitboxComponent) -> void:
+	enemy_defeated.emit()
 	queue_free()
 
 

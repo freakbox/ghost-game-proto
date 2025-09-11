@@ -1,99 +1,33 @@
-[gd_scene load_steps=15 format=3 uid="uid://dh1f2ncugbw66"]
+[gd_scene load_steps=2 format=3 uid="uid://dh1f2ncugbw66"]
 
-[ext_resource type="Texture2D" uid="uid://dfvlbpt63kqih" path="res://assets/images/background.png" id="1_o5qli"]
-[ext_resource type="Script" uid="uid://bm1qqprsdynxe" path="res://scenes/main.gd" id="1_tbgi4"]
-[ext_resource type="PackedScene" uid="uid://d06u1petenewx" path="res://scenes/shield/shield.tscn" id="2_0wfyh"]
-[ext_resource type="PackedScene" uid="uid://bvo66ap8lkl" path="res://scenes/enemy/enemy.tscn" id="3_sugp2"]
-[ext_resource type="Script" uid="uid://bcmxsh7st8nja" path="res://scripts/collision/hurtbox_component.gd" id="4_jyhfs"]
-[ext_resource type="Texture2D" uid="uid://u6d0m4ujosq3" path="res://assets/images/button-left1.png" id="6_tefeu"]
-[ext_resource type="Texture2D" uid="uid://cl45kw8jadj5b" path="res://assets/images/button-right1.png" id="7_o6xl0"]
-[ext_resource type="Texture2D" uid="uid://bvbjgnq605ytv" path="res://assets/images/invisible-button.png" id="8_85g3d"]
-[ext_resource type="AudioStream" uid="uid://dm4qbfiadn082" path="res://assets/music/spartans.mp3" id="8_tipki"]
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_o5qli"]
-normal = Vector2(1, 0)
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0wfyh"]
-normal = Vector2(-1, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tbgi4"]
-size = Vector2(160, 10)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tipki"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85g3d"]
-bg_color = Color(0.391765, 0.768085, 1, 1)
+[ext_resource type="Script" uid="uid://bum30wtwop4uh" path="res://scenes/main.gd" id="1_tbgi4"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tbgi4")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(160, 90)
-texture = ExtResource("1_o5qli")
+[node name="Button" type="Button" parent="."]
+offset_left = 27.0
+offset_top = 14.0
+offset_right = 89.0
+offset_bottom = 45.0
+text = "Level 1
+"
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(160, 90)
+[node name="Button2" type="Button" parent="."]
+offset_left = 33.0
+offset_top = 51.0
+offset_right = 85.0
+offset_bottom = 78.0
+text = "Level 2
+"
 
-[node name="LeftBoundary" type="StaticBody2D" parent="."]
-position = Vector2(80, 0)
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary"]
-shape = SubResource("WorldBoundaryShape2D_o5qli")
-
-[node name="RightBoundary" type="StaticBody2D" parent="."]
-position = Vector2(240, 0)
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
-shape = SubResource("WorldBoundaryShape2D_0wfyh")
-
-[node name="Shield" parent="." instance=ExtResource("2_0wfyh")]
-position = Vector2(160, 140)
-
-[node name="Enemy" parent="." instance=ExtResource("3_sugp2")]
-position = Vector2(160, 40)
-
-[node name="HurtboxComponent" type="Area2D" parent="."]
-position = Vector2(160, 160)
-collision_layer = 2
-collision_mask = 0
-script = ExtResource("4_jyhfs")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
-shape = SubResource("RectangleShape2D_tbgi4")
-
-[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
-position = Vector2(10, 126)
-texture_normal = ExtResource("6_tefeu")
-texture_pressed = ExtResource("6_tefeu")
-action = "left"
-
-[node name="TouchScreenButton2" type="TouchScreenButton" parent="."]
-position = Vector2(260, 126)
-texture_normal = ExtResource("7_o6xl0")
-texture_pressed = ExtResource("7_o6xl0")
-passby_press = true
-action = "right"
-
-[node name="TouchScreenButton3" type="TouchScreenButton" parent="."]
-position = Vector2(82, 118)
-scale = Vector2(3.41304, 1)
-texture_normal = ExtResource("8_85g3d")
-passby_press = true
-action = "attack"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_tipki")
-autoplay = true
-
-[node name="MagicProgressBar" type="ProgressBar" parent="."]
-offset_left = 14.0
-offset_top = 95.0
+[node name="Button3" type="Button" parent="."]
+offset_left = 34.0
+offset_top = 91.0
 offset_right = 57.0
-offset_bottom = 105.0
-theme_override_styles/background = SubResource("StyleBoxFlat_tipki")
-theme_override_styles/fill = SubResource("StyleBoxFlat_85g3d")
-max_value = 3.0
-step = 1.0
-show_percentage = false
+offset_bottom = 107.0
+text = "Level 3
+"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
