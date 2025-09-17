@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cs3tvs824xlc1"]
+
+[ext_resource type="Texture2D" uid="uid://clvom47aftpd" path="res://scenes/playermap/assets/image/playermap.png" id="1_66h6x"]
+[ext_resource type="Script" uid="uid://d3holkkgpfxku" path="res://scenes/playermap/playermap.gd" id="1_gqdml"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gqdml"]
+size = Vector2(12, 14)
+
+[node name="Playermap" type="CharacterBody2D"]
+collision_layer = 16
+script = ExtResource("1_gqdml")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gqdml")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_66h6x")
