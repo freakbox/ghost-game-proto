@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbhjckvvar543"]
+[gd_scene load_steps=6 format=3 uid="uid://dbhjckvvar543"]
 
 [ext_resource type="Texture2D" uid="uid://dcg0qr4wealfx" path="res://scenes/enemymap/assets/images/enemymap.png" id="1_7cn0e"]
 [ext_resource type="Script" uid="uid://7v7ssexu500a" path="res://scenes/enemymap/enemymap.gd" id="1_wnf8p"]
+[ext_resource type="AudioStream" uid="uid://mg7xj1d16r7p" path="res://scenes/enemymap/assets/sound/zombieHoouw_1.mp3" id="3_ygeia"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wnf8p"]
 size = Vector2(10, 12)
@@ -28,3 +29,6 @@ collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleTriggerArea2D"]
 shape = SubResource("RectangleShape2D_ygeia")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ygeia")

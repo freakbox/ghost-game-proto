@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+
 @export var speed: float = 80
 
 var _chasing_player: bool = false
@@ -26,9 +28,10 @@ func _physics_process(delta: float) -> void:
 			print('chase player')
 			_chasing_player = true
 			_player = ray_cast_2d.get_collider()
+			audio_stream_player.play()
 	
 
 
-func call_battle_scene(body: CharacterBody2D) -> void:
+func call_battle_scene(_body: CharacterBody2D) -> void:
 	get_tree().call_deferred("change_scene_to_file", "res://scenes/battle/battle.tscn")
 	
