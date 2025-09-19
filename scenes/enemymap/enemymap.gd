@@ -1,3 +1,4 @@
+class_name EnemyMap
 extends CharacterBody2D
 
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
@@ -10,8 +11,10 @@ var _player: CharacterBody2D
 
 @onready var battle_trigger_area_2d: Area2D = $BattleTriggerArea2D
 
+signal player_reached
+
 func _ready() -> void:
-	battle_trigger_area_2d.body_entered.connect(call_battle_scene)
+	battle_trigger_area_2d.body_entered.connect(handle_player_reached)
 
 
 func _physics_process(delta: float) -> void:
@@ -32,6 +35,7 @@ func _physics_process(delta: float) -> void:
 	
 
 
-func call_battle_scene(_body: CharacterBody2D) -> void:
-	get_tree().call_deferred("change_scene_to_file", "res://scenes/battle/battle.tscn")
+func handle_player_reached(_body: CharacterBody2D) -> void:
+	player_reached.emit()
+	#get_tree().call_deferred("change_scene_to_file", "res://scenes/battle/battle.tscn")
 	

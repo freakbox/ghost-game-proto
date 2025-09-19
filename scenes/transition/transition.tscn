@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d285d5uhsl87l"]
+
+[ext_resource type="Script" uid="uid://mo4mpxd1bkia" path="res://scenes/transition/transition.gd" id="1_wlg0m"]
+[ext_resource type="Shader" uid="uid://bcakehd5t5el4" path="res://scenes/transition/circle_wipe.gdshader" id="2_kg44o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kg44o"]
+shader = ExtResource("2_kg44o")
+shader_parameter/radius = 1.5
+
+[node name="Transition" type="CanvasLayer"]
+script = ExtResource("1_wlg0m")
+
+[node name="CircleRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_kg44o")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2901961, 1, 1, 1)
