@@ -2,16 +2,21 @@
 
 [ext_resource type="Texture2D" uid="uid://dcg0qr4wealfx" path="res://scenes/enemymap/assets/images/enemymap.png" id="1_7cn0e"]
 [ext_resource type="Script" uid="uid://7v7ssexu500a" path="res://scenes/enemymap/enemymap.gd" id="1_wnf8p"]
-[ext_resource type="AudioStream" uid="uid://mg7xj1d16r7p" path="res://scenes/enemymap/assets/sound/zombieHoouw_1.mp3" id="3_ygeia"]
+[ext_resource type="Script" uid="uid://bd7gi4c126h10" path="res://scripts/collision/hitbox_component.gd" id="3_ygeia"]
+[ext_resource type="Script" uid="uid://ximcqb5icqsi" path="res://scripts/components/statemachines/state_machine_component.gd" id="4_y4i5p"]
+[ext_resource type="Script" uid="uid://w2q41uhp2xbp" path="res://scenes/enemymap/states/enemy_chasing_state.gd" id="5_iuhpw"]
+[ext_resource type="Script" uid="uid://d0uc23maeskdi" path="res://scenes/enemymap/states/enemy_idle_state.gd" id="6_0hlg3"]
+[ext_resource type="Script" uid="uid://cqdbab3pmakph" path="res://scenes/enemymap/states/enemy_possessed_state.gd" id="7_0hlg3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wnf8p"]
 size = Vector2(10, 12)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ygeia"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4i5p"]
 size = Vector2(12, 14)
 
 [node name="Enemymap" type="CharacterBody2D" unique_id=257466771]
-collision_layer = 0
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_wnf8p")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1031377111]
@@ -21,14 +26,33 @@ texture = ExtResource("1_7cn0e")
 shape = SubResource("RectangleShape2D_wnf8p")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1193269309]
+target_position = Vector2(0, 100)
 collision_mask = 16
 
-[node name="BattleTriggerArea2D" type="Area2D" parent="." unique_id=1100741917]
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=735587771]
 collision_layer = 0
-collision_mask = 16
+collision_mask = 2
+script = ExtResource("3_ygeia")
+metadata/_custom_type_script = "uid://bd7gi4c126h10"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleTriggerArea2D" unique_id=65198578]
-shape = SubResource("RectangleShape2D_ygeia")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=886384995]
+shape = SubResource("RectangleShape2D_y4i5p")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=472981859]
-stream = ExtResource("3_ygeia")
+[node name="StateMachineComponent" type="Node" parent="." unique_id=1454143385 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_y4i5p")
+initial_state = NodePath("idle")
+
+[node name="chasing" type="Node" parent="StateMachineComponent" unique_id=1617507927 node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_iuhpw")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://w2q41uhp2xbp"
+
+[node name="idle" type="Node" parent="StateMachineComponent" unique_id=1889847463 node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_0hlg3")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://d0uc23maeskdi"
+
+[node name="possessed" type="Node" parent="StateMachineComponent" unique_id=1686970319 node_paths=PackedStringArray("enemy")]
+script = ExtResource("7_0hlg3")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://cqdbab3pmakph"

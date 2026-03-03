@@ -1,17 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://cs3tvs824xlc1"]
+[gd_scene format=3 uid="uid://cs3tvs824xlc1"]
 
 [ext_resource type="Texture2D" uid="uid://clvom47aftpd" path="res://scenes/playermap/assets/image/playermap.png" id="1_66h6x"]
 [ext_resource type="Script" uid="uid://d3holkkgpfxku" path="res://scenes/playermap/playermap.gd" id="1_gqdml"]
+[ext_resource type="Script" uid="uid://1dik57fck32q" path="res://scripts/components/health/health_component.gd" id="3_mf8ue"]
+[ext_resource type="Script" uid="uid://bcmxsh7st8nja" path="res://scripts/collision/hurtbox_component.gd" id="4_0cj1p"]
+[ext_resource type="Script" uid="uid://x4wq82ssgcig" path="res://scripts/components/health/receive_damage_component.gd" id="5_puioc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gqdml"]
 size = Vector2(12, 14)
 
-[node name="Playermap" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0cj1p"]
+size = Vector2(12, 14)
+
+[node name="Playermap" type="CharacterBody2D" unique_id=1313681880]
 collision_layer = 16
 script = ExtResource("1_gqdml")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2049375534]
 shape = SubResource("RectangleShape2D_gqdml")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1567959087]
 texture = ExtResource("1_66h6x")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1021297004]
+script = ExtResource("3_mf8ue")
+health = 100
+
+[node name="HurtboxComponent" type="Area2D" parent="." unique_id=1212402036]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("4_0cj1p")
+metadata/_custom_type_script = "uid://bcmxsh7st8nja"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=1917693023]
+shape = SubResource("RectangleShape2D_0cj1p")
+
+[node name="ReceiveDamageComponent" type="Node" parent="." unique_id=233651515 node_paths=PackedStringArray("hurtbox", "health_component")]
+script = ExtResource("5_puioc")
+hurtbox = NodePath("../HurtboxComponent")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://x4wq82ssgcig"

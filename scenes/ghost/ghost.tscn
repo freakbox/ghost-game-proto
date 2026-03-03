@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://bs7o4vfjn1c"]
+
+[ext_resource type="Script" uid="uid://bqxh34cc0jnfr" path="res://scenes/ghost/ghost.gd" id="1_cm38u"]
+[ext_resource type="Texture2D" uid="uid://dlfx63mmmk5pg" path="res://scenes/ghost/ghost.png" id="1_gf5mu"]
+[ext_resource type="Script" uid="uid://ximcqb5icqsi" path="res://scripts/components/statemachines/state_machine_component.gd" id="3_h8yyx"]
+[ext_resource type="Script" uid="uid://dbybc62tpf7oh" path="res://scenes/ghost/states/ghost_idle_state.gd" id="4_lej1e"]
+[ext_resource type="Script" uid="uid://croqq72o7u1ko" path="res://scenes/ghost/states/ghost_attacking_state.gd" id="5_ki37b"]
+[ext_resource type="Script" uid="uid://c6xr6upw3l687" path="res://scenes/ghost/states/ghost_returning_state.gd" id="6_8phmj"]
+[ext_resource type="Script" uid="uid://k7jf26i642wk" path="res://scenes/ghost/states/ghost_controlling_state.gd" id="7_ki37b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cm38u"]
+size = Vector2(10, 14)
+
+[node name="Ghost" type="Area2D" unique_id=1283636520]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_cm38u")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1889183263]
+modulate = Color(1, 1, 1, 0.62352943)
+texture = ExtResource("1_gf5mu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=744307438]
+shape = SubResource("RectangleShape2D_cm38u")
+
+[node name="StateMachineComponent" type="Node" parent="." unique_id=95876850 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_h8yyx")
+initial_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="StateMachineComponent" unique_id=904831713 node_paths=PackedStringArray("ghost")]
+script = ExtResource("4_lej1e")
+ghost = NodePath("../..")
+metadata/_custom_type_script = "uid://dbybc62tpf7oh"
+
+[node name="attacking" type="Node" parent="StateMachineComponent" unique_id=1165794029 node_paths=PackedStringArray("ghost")]
+script = ExtResource("5_ki37b")
+ghost = NodePath("../..")
+metadata/_custom_type_script = "uid://croqq72o7u1ko"
+
+[node name="returning" type="Node" parent="StateMachineComponent" unique_id=1437290557 node_paths=PackedStringArray("ghost")]
+script = ExtResource("6_8phmj")
+ghost = NodePath("../..")
+metadata/_custom_type_script = "uid://c6xr6upw3l687"
+
+[node name="controlling" type="Node" parent="StateMachineComponent" unique_id=1690990839 node_paths=PackedStringArray("ghost")]
+script = ExtResource("7_ki37b")
+ghost = NodePath("../..")
+metadata/_custom_type_script = "uid://k7jf26i642wk"
