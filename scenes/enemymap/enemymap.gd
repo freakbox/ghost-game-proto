@@ -5,6 +5,8 @@ extends CharacterBody2D
 @export var speed: float = 40
 @onready var state_machine_component: StateMachineComponent = $StateMachineComponent
 @onready var possessed: EnemyPossessdState = $StateMachineComponent/possessed
+@onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
+@onready var health_component: HealthComponent = $HealthComponent
 
 var _ghost: Ghost
 
@@ -29,6 +31,7 @@ func handle_player_reached(_body: CharacterBody2D) -> void:
 func get_ghost(ghost: Ghost) -> void:
 	_ghost = ghost
 	state_machine_component.state.finished.emit("possessed")
+
 
 func release_ghost() -> void:
 	_ghost = null

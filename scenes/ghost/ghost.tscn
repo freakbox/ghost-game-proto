@@ -7,9 +7,13 @@
 [ext_resource type="Script" uid="uid://croqq72o7u1ko" path="res://scenes/ghost/states/ghost_attacking_state.gd" id="5_ki37b"]
 [ext_resource type="Script" uid="uid://c6xr6upw3l687" path="res://scenes/ghost/states/ghost_returning_state.gd" id="6_8phmj"]
 [ext_resource type="Script" uid="uid://k7jf26i642wk" path="res://scenes/ghost/states/ghost_controlling_state.gd" id="7_ki37b"]
+[ext_resource type="Script" uid="uid://bd7gi4c126h10" path="res://scripts/collision/hitbox_component.gd" id="8_8phmj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cm38u"]
 size = Vector2(10, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0knb"]
+size = Vector2(22, 22)
 
 [node name="Ghost" type="Area2D" unique_id=1283636520]
 collision_layer = 0
@@ -42,7 +46,21 @@ script = ExtResource("6_8phmj")
 ghost = NodePath("../..")
 metadata/_custom_type_script = "uid://c6xr6upw3l687"
 
-[node name="controlling" type="Node" parent="StateMachineComponent" unique_id=1690990839 node_paths=PackedStringArray("ghost")]
+[node name="controlling" type="Node" parent="StateMachineComponent" unique_id=1690990839 node_paths=PackedStringArray("hitbox_collision_shape", "ghost")]
 script = ExtResource("7_ki37b")
+hitbox_collision_shape = NodePath("../../HitboxComponent/CollisionShape2D")
 ghost = NodePath("../..")
 metadata/_custom_type_script = "uid://k7jf26i642wk"
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1474944860]
+collision_mask = 4
+
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=1748959636]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("8_8phmj")
+metadata/_custom_type_script = "uid://bd7gi4c126h10"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=812842511]
+shape = SubResource("RectangleShape2D_v0knb")
+disabled = true

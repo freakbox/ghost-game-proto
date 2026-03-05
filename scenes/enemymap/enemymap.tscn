@@ -7,12 +7,19 @@
 [ext_resource type="Script" uid="uid://w2q41uhp2xbp" path="res://scenes/enemymap/states/enemy_chasing_state.gd" id="5_iuhpw"]
 [ext_resource type="Script" uid="uid://d0uc23maeskdi" path="res://scenes/enemymap/states/enemy_idle_state.gd" id="6_0hlg3"]
 [ext_resource type="Script" uid="uid://cqdbab3pmakph" path="res://scenes/enemymap/states/enemy_possessed_state.gd" id="7_0hlg3"]
+[ext_resource type="Script" uid="uid://bcmxsh7st8nja" path="res://scripts/collision/hurtbox_component.gd" id="8_gtmak"]
+[ext_resource type="Script" uid="uid://1dik57fck32q" path="res://scripts/components/health/health_component.gd" id="9_1n54v"]
+[ext_resource type="Script" uid="uid://bt85vuixebn70" path="res://scripts/remove/destroy_when_health_depleted_component.gd" id="10_xwdan"]
+[ext_resource type="Script" uid="uid://x4wq82ssgcig" path="res://scripts/components/health/receive_damage_component.gd" id="11_tt8kc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wnf8p"]
 size = Vector2(10, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y4i5p"]
 size = Vector2(12, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1n54v"]
+size = Vector2(14, 16)
 
 [node name="Enemymap" type="CharacterBody2D" unique_id=257466771]
 collision_layer = 4
@@ -56,3 +63,30 @@ metadata/_custom_type_script = "uid://d0uc23maeskdi"
 script = ExtResource("7_0hlg3")
 enemy = NodePath("../..")
 metadata/_custom_type_script = "uid://cqdbab3pmakph"
+
+[node name="HurtboxComponent" type="Area2D" parent="." unique_id=1615009797]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("8_gtmak")
+metadata/_custom_type_script = "uid://bcmxsh7st8nja"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=1431590809]
+shape = SubResource("RectangleShape2D_1n54v")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=222629437]
+script = ExtResource("9_1n54v")
+max_health = 5
+health = 5
+metadata/_custom_type_script = "uid://1dik57fck32q"
+
+[node name="DestroyWhenHealthDepletedComponent" type="Node" parent="." unique_id=1212103663 node_paths=PackedStringArray("actor", "health_component", "hurtbox")]
+script = ExtResource("10_xwdan")
+actor = NodePath("..")
+health_component = NodePath("../HealthComponent")
+hurtbox = NodePath("../HurtboxComponent")
+
+[node name="ReceiveDamageComponent" type="Node" parent="." unique_id=1649018608 node_paths=PackedStringArray("hurtbox", "health_component")]
+script = ExtResource("11_tt8kc")
+hurtbox = NodePath("../HurtboxComponent")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://x4wq82ssgcig"
