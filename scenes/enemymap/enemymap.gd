@@ -15,6 +15,8 @@ var _player: CharacterBody2D
 
 signal player_reached
 
+var current_room_index: int
+
 func _ready() -> void:
 	pass
 

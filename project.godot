@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 BattleLoader="*res://scripts/autoload/battle_loader.gd"
+RoomControl="*uid://b8tiiu8eaqjxx"
 
 [display]
 
@@ -85,6 +86,7 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_4="enemy_hurtbox"
 2d_physics/layer_5="playermap"
 2d_physics/layer_6="ghost"
+2d_physics/layer_7="room-area"
 
 [rendering]
 

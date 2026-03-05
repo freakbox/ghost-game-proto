@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bgct21p2tsdbo"]
+
+[ext_resource type="Texture2D" uid="uid://cm2nfohyktkep" path="res://assets/images/shield.png" id="1_bu3y2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_odsy8"]
+size = Vector2(66, 12)
+
+[node name="Door" type="CharacterBody2D" unique_id=1137621551]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1688028220]
+shape = SubResource("RectangleShape2D_odsy8")
+
+[node name="Shield" type="Sprite2D" parent="." unique_id=136969139]
+scale = Vector2(2.2187502, 1.25)
+texture = ExtResource("1_bu3y2")

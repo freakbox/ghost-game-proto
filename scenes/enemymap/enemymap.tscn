@@ -33,7 +33,7 @@ texture = ExtResource("1_7cn0e")
 shape = SubResource("RectangleShape2D_wnf8p")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1193269309]
-target_position = Vector2(0, 100)
+target_position = Vector2(0, 300)
 collision_mask = 16
 
 [node name="HitboxComponent" type="Area2D" parent="." unique_id=735587771]
