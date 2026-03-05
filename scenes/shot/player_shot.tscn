@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://fsc2elm8ci4v"]
+
+[ext_resource type="Texture2D" uid="uid://q4v0j57rov40" path="res://assets/images/sword.png" id="1_1xl2y"]
+[ext_resource type="Script" uid="uid://cfuvq5gny13a" path="res://scenes/shot/player_shot.gd" id="1_fvds7"]
+[ext_resource type="Script" uid="uid://bd7gi4c126h10" path="res://scripts/collision/hitbox_component.gd" id="2_chtei"]
+[ext_resource type="Script" uid="uid://bhywh1dasaj8y" path="res://scripts/remove/remove_when_collides_component.gd" id="3_sekmd"]
+[ext_resource type="Script" uid="uid://dxrhut4sy46jb" path="res://scripts/remove/remove_when_hitbox_hits_component.gd" id="4_fvds7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sekmd"]
+size = Vector2(2, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fvds7"]
+size = Vector2(4, 10)
+
+[node name="PlayerShot" type="CharacterBody2D" unique_id=261224998]
+collision_layer = 0
+script = ExtResource("1_fvds7")
+
+[node name="Sword" type="Sprite2D" parent="." unique_id=623770050]
+scale = Vector2(0.625, 0.375)
+texture = ExtResource("1_1xl2y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=801864389]
+shape = SubResource("RectangleShape2D_sekmd")
+
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=724406120]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("2_chtei")
+metadata/_custom_type_script = "uid://bd7gi4c126h10"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=933698285]
+shape = SubResource("RectangleShape2D_fvds7")
+
+[node name="RemoveWhenCollidesComponent" type="Node" parent="." unique_id=1246518404 node_paths=PackedStringArray("actor", "detect_area")]
+script = ExtResource("3_sekmd")
+actor = NodePath("..")
+detect_area = NodePath("../Area2D")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=160059300]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1800067495]
+shape = SubResource("RectangleShape2D_fvds7")
+
+[node name="RemoveWhenHitboxHitsComponent" type="Node" parent="." unique_id=730799506 node_paths=PackedStringArray("actor", "hitbox_component")]
+script = ExtResource("4_fvds7")
+actor = NodePath("..")
+hitbox_component = NodePath("../HitboxComponent")

@@ -5,6 +5,9 @@
 [ext_resource type="Script" uid="uid://1dik57fck32q" path="res://scripts/components/health/health_component.gd" id="3_mf8ue"]
 [ext_resource type="Script" uid="uid://bcmxsh7st8nja" path="res://scripts/collision/hurtbox_component.gd" id="4_0cj1p"]
 [ext_resource type="Script" uid="uid://x4wq82ssgcig" path="res://scripts/components/health/receive_damage_component.gd" id="5_puioc"]
+[ext_resource type="Script" uid="uid://dmijgrsf05r1g" path="res://scripts/spawn/spawner_component.gd" id="6_25smu"]
+[ext_resource type="PackedScene" uid="uid://fsc2elm8ci4v" path="res://scenes/shot/player_shot.tscn" id="7_yhyip"]
+[ext_resource type="Script" uid="uid://ep03vd3gaqqu" path="res://scripts/components/player_shot_component.gd" id="8_yhyip"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gqdml"]
 size = Vector2(12, 14)
@@ -40,3 +43,14 @@ script = ExtResource("5_puioc")
 hurtbox = NodePath("../HurtboxComponent")
 health_component = NodePath("../HealthComponent")
 metadata/_custom_type_script = "uid://x4wq82ssgcig"
+
+[node name="SpawnerComponent" type="Node2D" parent="." unique_id=886957786]
+script = ExtResource("6_25smu")
+scene = ExtResource("7_yhyip")
+metadata/_custom_type_script = "uid://dmijgrsf05r1g"
+
+[node name="PlayerShotComponent" type="Node" parent="." unique_id=1425074549 node_paths=PackedStringArray("player", "spawner_component")]
+script = ExtResource("8_yhyip")
+player = NodePath("..")
+spawner_component = NodePath("../SpawnerComponent")
+metadata/_custom_type_script = "uid://ep03vd3gaqqu"
