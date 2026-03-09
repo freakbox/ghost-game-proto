@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://w2q41uhp2xbp" path="res://scenes/enemymap/states/enemy_chasing_state.gd" id="5_iuhpw"]
 [ext_resource type="Script" uid="uid://d0uc23maeskdi" path="res://scenes/enemymap/states/enemy_idle_state.gd" id="6_0hlg3"]
 [ext_resource type="Script" uid="uid://cqdbab3pmakph" path="res://scenes/enemymap/states/enemy_possessed_state.gd" id="7_0hlg3"]
+[ext_resource type="Script" uid="uid://b1yter6qiawwq" path="res://scenes/enemymap/states/enemy_opening_switch_state.gd" id="8_2182x"]
 [ext_resource type="Script" uid="uid://bcmxsh7st8nja" path="res://scripts/collision/hurtbox_component.gd" id="8_gtmak"]
 [ext_resource type="Script" uid="uid://1dik57fck32q" path="res://scripts/components/health/health_component.gd" id="9_1n54v"]
 [ext_resource type="Script" uid="uid://bt85vuixebn70" path="res://scripts/remove/destroy_when_health_depleted_component.gd" id="10_xwdan"]
@@ -36,6 +37,10 @@ shape = SubResource("RectangleShape2D_wnf8p")
 target_position = Vector2(0, 300)
 collision_mask = 16
 
+[node name="RayCast2DSwitch" type="RayCast2D" parent="." unique_id=423432894]
+target_position = Vector2(0, 300)
+collision_mask = 128
+
 [node name="HitboxComponent" type="Area2D" parent="." unique_id=735587771]
 collision_layer = 0
 collision_mask = 2
@@ -63,6 +68,11 @@ metadata/_custom_type_script = "uid://d0uc23maeskdi"
 script = ExtResource("7_0hlg3")
 enemy = NodePath("../..")
 metadata/_custom_type_script = "uid://cqdbab3pmakph"
+
+[node name="openingswitch" type="Node" parent="StateMachineComponent" unique_id=1445204246 node_paths=PackedStringArray("enemy")]
+script = ExtResource("8_2182x")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://b1yter6qiawwq"
 
 [node name="HurtboxComponent" type="Area2D" parent="." unique_id=1615009797]
 collision_layer = 8

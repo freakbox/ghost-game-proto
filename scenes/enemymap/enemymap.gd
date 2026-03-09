@@ -2,6 +2,7 @@ class_name EnemyMap
 extends CharacterBody2D
 
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
+@onready var ray_cast_2d_switch: RayCast2D = $RayCast2DSwitch
 @export var speed: float = 40
 @onready var state_machine_component: StateMachineComponent = $StateMachineComponent
 @onready var possessed: EnemyPossessdState = $StateMachineComponent/possessed

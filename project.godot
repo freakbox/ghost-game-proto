@@ -87,6 +87,7 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_5="playermap"
 2d_physics/layer_6="ghost"
 2d_physics/layer_7="room-area"
+2d_physics/layer_8="switch"
 
 [rendering]
 

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dst0xkatmxu8l"]
+
+[ext_resource type="Script" uid="uid://xfje1kp4jluy" path="res://scenes/door_switch/door_switch.gd" id="1_t2l4n"]
+[ext_resource type="Texture2D" uid="uid://b332pa72v6qyy" path="res://scenes/door_switch/switch.png" id="2_snbcu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2l4n"]
+
+[node name="DoorSwitch" type="Area2D" unique_id=292885777]
+collision_layer = 128
+collision_mask = 4
+script = ExtResource("1_t2l4n")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1866460040]
+texture = ExtResource("2_snbcu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1586791977]
+shape = SubResource("RectangleShape2D_t2l4n")

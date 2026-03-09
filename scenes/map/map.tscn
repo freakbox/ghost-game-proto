@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://yxknrauvn4be" path="res://scenes/map/assets/sound/whoosh1(1).mp3" id="7_04w0f"]
 [ext_resource type="PackedScene" uid="uid://bgct21p2tsdbo" path="res://scenes/door/door.tscn" id="10_f17u5"]
 [ext_resource type="Script" uid="uid://bjtid8lsote2y" path="res://scripts/remove/ttl_component.gd" id="11_b56te"]
+[ext_resource type="PackedScene" uid="uid://dst0xkatmxu8l" path="res://scenes/door_switch/door_switch.tscn" id="12_x2kg6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sqgf4"]
 size = Vector2(184, 166)
@@ -1176,7 +1177,10 @@ tile_set = SubResource("TileSet_ph54e")
 [node name="Enemymap" parent="." unique_id=2132103884 instance=ExtResource("3_a2pkv")]
 position = Vector2(279, 120)
 
-[node name="Enemymap2" parent="." unique_id=257466771 instance=ExtResource("3_a2pkv")]
+[node name="Enemymap11" parent="." unique_id=257466771 instance=ExtResource("3_a2pkv")]
+position = Vector2(250, 120)
+
+[node name="Enemymap2" parent="." unique_id=1242286762 instance=ExtResource("3_a2pkv")]
 position = Vector2(256, 154)
 
 [node name="Enemymap3" parent="." unique_id=1209692323 instance=ExtResource("3_a2pkv")]
@@ -1251,3 +1255,7 @@ timer = NodePath("../Timer3")
 wait_time = 15.0
 one_shot = true
 autostart = true
+
+[node name="DoorSwitch" parent="." unique_id=292885777 node_paths=PackedStringArray("door") instance=ExtResource("12_x2kg6")]
+position = Vector2(242, 125)
+door = NodePath("../Door3")
